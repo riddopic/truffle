@@ -1,9 +1,13 @@
 module.exports = async function (options) {
-  const Config = require("@truffle/config");
   const Console = require("../../console");
+  const loadConfig = require("../debug/loadConfig");
   const { Environment } = require("@truffle/environment");
 
-  const config = Config.detect(options);
+  if (options.url && options.network) {
+    throw new Error("Url and Network options should not be specified together");
+  }
+
+  let config = loadConfig(options);
 
   const commands = require("../index");
   const excluded = new Set(["console", "init", "watch", "develop"]);
