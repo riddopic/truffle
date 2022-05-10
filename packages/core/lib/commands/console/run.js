@@ -4,7 +4,9 @@ module.exports = async function (options) {
   const { Environment } = require("@truffle/environment");
 
   if (options.url && options.network) {
-    throw new Error("Url and Network options should not be specified together");
+    throw new Error(
+      "'url' and 'network' options should not be specified together"
+    );
   }
 
   let config = loadConfig(options);
